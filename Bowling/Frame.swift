@@ -5,6 +5,8 @@ enum FrameError: Error {
     case CantHaveThirdBall
 }
 
+// Frame can have up to three balls (to accommodate 10th frame) but the tenth frame handling does
+// rather complicate things unfortunately.
 class Frame {
     var frameNumber: Int
     var ball1: Int?

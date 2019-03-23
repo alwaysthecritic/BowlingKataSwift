@@ -1,5 +1,7 @@
 import Foundation
 
+// Tactic is to build up array of Frames as each ball is rolled.
+// Each Frame can score itself but needs access to subsequent frames to do so.
 class BowlingGame {
     private var frames = [Frame]()
 
@@ -8,7 +10,10 @@ class BowlingGame {
         let nextFrames = frames.dropFirst() + [emptyLastNextFrame]
         let framesWithNextFrames = zip(frames, nextFrames)
         let frameScores = framesWithNextFrames.map { (frame, nextFrame) in
-            frame.score(nextFrame: nextFrame) }
+            // TODO unfortunately, just the next frame is not enough when there are multiple
+            // strikes in a row, where we may need the next two frames.
+            frame.score(nextFrame: nextFrame)
+        }
         return frameScores.reduce(0, +)
     }
 
