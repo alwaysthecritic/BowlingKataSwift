@@ -6,30 +6,30 @@ class FramesForBallsTests: XCTestCase {
         XCTAssertEqual(framesForBalls([]), [])
     }
 
-    func testFrameFromOneBall() {
+    func testFramesForOneBall() {
         XCTAssertEqual(framesForBalls([5]),
                        [Frame(ball1: 5, ball2: nil, subsequentBalls: [])])
     }
 
-    func testOneFrameTwoBalls() {
+    func testOneFrameForTwoBalls() {
         XCTAssertEqual(framesForBalls([5, 3]),
                        [Frame(ball1: 5, ball2: 3, subsequentBalls: [])])
     }
 
-    func testTwoFramesThreeBalls() {
+    func testTwoFramesForThreeBalls() {
         XCTAssertEqual(framesForBalls([5, 3, 7]),
                        [Frame(ball1: 5, ball2: 3, subsequentBalls: [7]),
                         Frame(ball1: 7, ball2: nil, subsequentBalls: [])])
     }
 
-    func testStrikes() {
+    func testThreeFramesForThreeStrikes() {
         XCTAssertEqual(framesForBalls([10, 10, 10]),
                        [Frame(ball1: 10, ball2: nil, subsequentBalls: [10, 10]),
                         Frame(ball1: 10, ball2: nil, subsequentBalls: [10]),
                         Frame(ball1: 10, ball2: nil, subsequentBalls: [])])
     }
 
-    func testPerfectGame() {
+    func testFramesForPerfectGame() {
         XCTAssertEqual(framesForBalls([10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10]),
                        [Frame(ball1: 10, ball2: nil, subsequentBalls: [10, 10]),
                         Frame(ball1: 10, ball2: nil, subsequentBalls: [10, 10]),
