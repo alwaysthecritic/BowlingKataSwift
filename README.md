@@ -44,3 +44,11 @@ I also improved the code to only send a maximum of two subsequentBalls, which is
 The net result is that the tests are now much more readable and it's easier to see what they're saying. I think it's worth investing in making tests really _speak_ to you, so they're easy to read and write courtesy of being a straightforward declaration of what you intend in the domain. Factor out all the incidental mess and get those tests talking! More work yet to be done in those code base to achieve that in the other tests.   
 
 The downside of doing one big array comparison is that when a test fails you get a poor message with the entire actual and expected arrays included. That makes it almost impossible to see what was different between them. Personally I consider this a failing of XCTest. I really miss the excellent output you get from tools in JVM-land like Spock (for Groovy) which highlight the differences for you. Maybe there's a way to get this in Swift.
+
+### tag: take_frame
+
+I wondered if it would be neater to break the balls down into frames by having a function that simply takes _one_ frame from the head of the array of balls. Then we can call that function repeatedly until we've used up all the balls (or got 10 ten frames). The takeFrame function should be a bit simpler to test and it might work out shorter and nicer.
+
+The result is ok, but not entirely convincing. The tests did get simpler, but the code is a bit bogged down in the irritations of Array being a value type and non-mutable when arriving as a parameter, and also because of the tuple return type.
+
+

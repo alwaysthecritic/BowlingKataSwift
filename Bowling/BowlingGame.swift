@@ -10,28 +10,35 @@ class BowlingGame {
     }
 
     var score: Int {
-        return framesForBalls(balls).map({ $0.score }).reduce(0, +)
+        return frames.map({ $0.score }).reduce(0, +)
+    }
+
+    private var frames: [Frame] {
+        var remainingBalls = balls
+        var frames = [Frame]()
+        while (!remainingBalls.isEmpty && frames.count < 10) {
+            if let (frame, ballsLeft) = takeFrame(remainingBalls) {
+                remainingBalls = ballsLeft
+                frames.append(frame)
+            }
+        }
+        return frames
     }
 }
 
-// More easily testable as a standalone than as a private method. Doesn't warrant a class.
-func framesForBalls(_ balls: [Int]) -> [Frame] {
-    var remainingBalls = balls
-    var frames = [Frame]()
-
-    while (!remainingBalls.isEmpty && frames.count < 10) {
-        let ball1 = remainingBalls.removeFirst()
-
-        if (ball1 == 10) {
-            frames.append(Frame(ball1: ball1, ball2: nil,
-                                subsequentBalls: Array(remainingBalls.prefix(2))))
-        } else {
-            let ball2 = remainingBalls.isEmpty ? nil : remainingBalls.removeFirst()
-            frames.append(Frame(ball1: ball1, ball2: ball2,
-                                subsequentBalls: Array(remainingBalls.prefix(2))))
-        }
+// Take balls from the front of the array to create a single frame if possible,
+// returning the frame and the remaining balls, or nil if no frame left.
+func takeFrame(_ balls: [Int]) -> (frame: Frame, remainingBalls: [Int])? {
+    guard balls.count >= 1 else {
+        return nil
     }
-    return frames
+
+    let ball1 = balls[0]
+    let ball2 = (ball1 != 10 && balls.count >= 2) ? balls[1] : nil
+
+    let remainingBalls = Array(balls.suffix(from: (ball2 == nil) ? 1 : 2))
+    let frame = Frame(ball1: ball1, ball2: ball2, subsequentBalls: Array(remainingBalls.prefix(2)))
+    return (frame, remainingBalls)
 }
 
 // By modelling a frame with a subsequentBalls array, we don't need to handle the tenth frame
