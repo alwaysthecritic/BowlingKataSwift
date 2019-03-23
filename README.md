@@ -53,6 +53,10 @@ The result is ok, but not necessarily much better - just different. The tests di
 
 I also took the opportunity to move that function into Frame as a static method. I'm not sure whether it belongs there or not, because now the class has effectively two responsibilities - creating Frames from balls, and scoring.
 
+### tag: recursive
 
+Because I was having fun, I wondered if a recursive approach to creating the Frames would work out well.
 
+It does in terms of overall code length, the whole solution now being just 54 lines including comments, blank lines etc. Two things bother me though: recursive solutions are usually harder to wrap your mind around, especially if you're not used to it; I was forced to use array subscripting and fiddly bounds checks to make it work, which is harder to read in my opinion.
 
+The function moves back to being a standalone function, but I'm fairly conflicted about where it should live. However I proved the worth of being able to directly unit test it, because I had a subtle bug that would have been a pain to find otherwise.
