@@ -63,9 +63,8 @@ class GameTests: XCTestCase {
         roll(10, assertScore: 300)
     }
 
-    private func roll(_ ball: Int, assertScore score: Int,
-                      file: StaticString = #file, line: UInt = #line) {
+    private func roll(_ ball: Int, assertScore score: Int, line: UInt = #line) {
         game.roll(ball)
-        XCTAssertEqual(game.score, score, file: file, line: line)
+        XCTAssertEqual(game.score, score, line: line)
     }
 }
