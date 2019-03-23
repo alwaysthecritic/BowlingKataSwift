@@ -74,3 +74,5 @@ Here I put effort into making BowlingGameTests clearer, by factoring out noise i
 The result is much smaller and easier to read.
 
 Initially I stumbled on a downside of moving the actual `XCTAssert` into a helper method: XCode doesn't show the failed test line in the right place - but always on the helper itself. It turns out this can be rectified by adding `file: StaticString = #file, line: UInt = #line` arguments to the helper, which pick up the right location using macros, and can then pass them into the `XCTAssert` call. Actually, just `line: UInt = #line` is enough when the helper is in the same file. Problem solved.
+
+There's a meta-point there too. Having observed the helper method problem I could have just accepted it and moved on, or decided against using a helper. But I intuited that this was such a common idiom that others would have run into the issue and that it would be surprising if there wasn't a better way. A bit of judicious Googling and I had the proper solution. I very often find that a well-developed sense for 'how things should be' pays dividends. 
