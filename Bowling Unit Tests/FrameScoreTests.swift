@@ -1,49 +1,24 @@
 import XCTest
 
+fileprivate let cases:
+    [(ball1: Int, ball2: Int?, subsequentBalls: [Int], expectedScore: Int, line: UInt)] = [
+//   b1  b2   subsBalls score
+    (4,  nil, [],       4,    #line),
+    (4,  5,   [],       9,    #line),
+    (3,  7,   [],       10,   #line),
+    (3,  7,   [4],      14,   #line),
+    (3,  7,   [4, 3],   14,   #line),
+    (10, nil, [],       10,   #line),
+    (10, nil, [5],      15,   #line),
+    (10, nil, [5, 4],   19,   #line),
+    (10, 10,  [10],     30,   #line)]
+
 class FrameScoreTests: XCTestCase {
 
-    func testScoringOneBall() {
-        let frame = Frame(ball1: 4, ball2: nil, subsequentBalls: [])
-        XCTAssertEqual(frame.score, 4)
-    }
-
-    func testScoringTwoBalls() {
-        let frame = Frame(ball1: 4, ball2: 5, subsequentBalls: [])
-        XCTAssertEqual(frame.score, 9)
-    }
-
-    func testScoringSpare() {
-        let frame = Frame(ball1: 3, ball2: 7, subsequentBalls: [])
-        XCTAssertEqual(frame.score, 10)
-    }
-
-    func testScoringSpareWithNextBall() {
-        let frame = Frame(ball1: 3, ball2: 7, subsequentBalls: [4])
-        XCTAssertEqual(frame.score, 14)
-    }
-
-    func testScoringSpareWithTwoMoreBallsUsesOnlyFirst() {
-        let frame = Frame(ball1: 3, ball2: 7, subsequentBalls: [4, 3])
-        XCTAssertEqual(frame.score, 14)
-    }
-
-    func testScoringStrikeNoMoreBallsYet() {
-        let frame = Frame(ball1: 10, ball2: nil, subsequentBalls: [])
-        XCTAssertEqual(frame.score, 10)
-    }
-
-    func testScoringStrikeOneMoreBall() {
-        let frame = Frame(ball1: 10, ball2: nil, subsequentBalls: [5])
-        XCTAssertEqual(frame.score, 15)
-    }
-
-    func testScoringStrikeTwoMoreBalls() {
-        let frame = Frame(ball1: 10, ball2: nil, subsequentBalls: [5, 4])
-        XCTAssertEqual(frame.score, 19)
-    }
-
-    func testScoringStrikeTwoMoreStrikes() {
-        let frame = Frame(ball1: 10, ball2: nil, subsequentBalls: [10, 10])
-        XCTAssertEqual(frame.score, 30)
+    func testFrameScores() {
+        cases.forEach { (ball1, ball2, subsequentBalls, expectedScore, line) in
+            let frame = Frame(ball1: ball1, ball2: ball2, subsequentBalls: subsequentBalls)
+            XCTAssertEqual(frame.score, expectedScore, line: line)
+        }
     }
 }

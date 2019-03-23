@@ -76,3 +76,11 @@ The result is much smaller and easier to read.
 Initially I stumbled on a downside of moving the actual `XCTAssert` into a helper method: XCode doesn't show the failed test line in the right place - but always on the helper itself. It turns out this can be rectified by adding `file: StaticString = #file, line: UInt = #line` arguments to the helper, which pick up the right location using macros, and can then pass them into the `XCTAssert` call. Actually, just `line: UInt = #line` is enough when the helper is in the same file. Problem solved.
 
 There's a meta-point there too. Having observed the helper method problem I could have just accepted it and moved on, or decided against using a helper. But I intuited that this was such a common idiom that others would have run into the issue and that it would be surprising if there wasn't a better way. A bit of judicious Googling and I had the proper solution. I very often find that a well-developed sense for 'how things should be' pays dividends. 
+
+### tag: parameterised_tests
+
+FrameScoreTests was crying out to use a parameterised (also known as data-driven) approach to testing, as all the tests had the exact same form. just with different values. It would be nice to state all the test cases as a table of all the values and expected outcomes.
+
+Sadly XCTest doesn't directly support this in the way that test frameworks for other languages do, and I couldn't find a third party Swift unit testing framework to do it either. People around the Interwebs have hacked their own approaches within the constraints of XCTest, but many of them were too complicated and failed to achieve Proper XCode integration that shows the failures against the right line of the table of test cases.
+
+Having experimented with a couple of approaches, I settled on a very simple tactic that just lists the cases as tuples in an array, and has the test method explicitly loop over them. Using the `#line` trick mentioned further above helps us to get the XCode integration working properly. Format the table of cases to taste. It's trivial to see how it all works - no magic, very little code - and we end up with the result we wanted. The only downside is the manual handling of `#line`, but I'll put up with that.
