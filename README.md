@@ -7,9 +7,9 @@ Twitter: @justthesam
 
 ## Description
 
-This is a solution to the classic Bowling kata, in Swift.
+This is a solution to the classic Bowling kata, in Swift. In simple terms this kata challenges you to score a single player bowling game. I shan't go into the details of the rules here.
 
-Actually I experimented with a couple of solutions and got sucked into polishing things up further as a learning exercise, so this git repo presents the evolution of the solution.
+Actually I experimented with a couple of solutions and got sucked into polishing things up further as a learning exercise, so this git repo presents the evolution of the solution. I've learnt a lot and had fun with it.
 
 ## Usage
 
@@ -17,7 +17,7 @@ The XCode project has a single target, which just runs unit tests to exercise th
 
 ## Evolution
 
-The following git tags capture various states.
+The following git tags capture various states as I worked through and improved my solution and tests.
 
 ### tag: initial_solution
 
@@ -84,3 +84,11 @@ FrameScoreTests was crying out to use a parameterised (also known as data-driven
 Sadly XCTest doesn't directly support this in the way that test frameworks for other languages do, and I couldn't find a third party Swift unit testing framework to do it either. People around the Interwebs have hacked their own approaches within the constraints of XCTest, but many of them were too complicated and failed to achieve Proper XCode integration that shows the failures against the right line of the table of test cases.
 
 Having experimented with a couple of approaches, I settled on a very simple tactic that just lists the cases as tuples in an array, and has the test method explicitly loop over them. Using the `#line` trick mentioned further above helps us to get the XCode integration working properly. Format the table of cases to taste. It's trivial to see how it all works - no magic, very little code - and we end up with the result we wanted. The only downside is the manual handling of `#line`, but I'll put up with that.
+
+## There's always another level / humility
+
+I'd got this far and was pretty pleased with myself. Maybe I've written the shortest, neatest ever Bowling kata solution? Call Norris McWhirter!
+
+But of course, there's always another level. I took a look at Uncle Bob's Java solution, hidden deep in a PowerPoint file linked from the top of http://butunclebob.com/ArticleS.UncleBob.TheBowlingGameKata. It's shorter still and perfectly straightforward. By not bothering with reifying the Frame, and just working directly with indexes into the array of balls, it all looks so simple.
+
+The whole point of going to town on this Kata though was to (a) have fun writing some code, (b) re-learn a bunch of Swift/XCode/Testing skills, (c) learn a bunch of incidental things along the way. Time well spent.
