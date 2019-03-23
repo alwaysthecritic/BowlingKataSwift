@@ -11,6 +11,10 @@ This is a solution to the classic Bowling kata, in Swift.
 
 Actually I experimented with a couple of solutions and got sucked into polishing things up further as a learning exercise, so this git repo presents the evolution of the solution.
 
+## Usage
+
+The XCode project has a single target, which just runs unit tests to exercise the code.
+
 ## Evolution
 
 The following git tags capture various states.
