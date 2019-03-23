@@ -16,14 +16,14 @@ class BowlingGame {
 
 // Recursively build Frames by taking balls from the array until none left.
 func framesForBalls(_ balls: [Int], framesSoFar: [Frame] = [Frame]()) -> [Frame] {
-    guard balls.count >= 1 && framesSoFar.count < 10 else {
+    if (balls.isEmpty || framesSoFar.count == 10) {
         return framesSoFar
     }
 
-    let ball1 = balls[0]
-    let ball2 = (ball1 != 10 && balls.count >= 2) ? balls[1] : nil
+    var remainingBalls = balls
+    let ball1 = remainingBalls.removeFirst()
+    let ball2 = (ball1 != 10 && !remainingBalls.isEmpty) ? remainingBalls.removeFirst() : nil
 
-    let remainingBalls = Array(balls.suffix(from: (ball2 == nil) ? 1 : 2))
     let frame = Frame(ball1: ball1, ball2: ball2, subsequentBalls: Array(remainingBalls.prefix(2)))
 
     return framesForBalls(remainingBalls, framesSoFar: (framesSoFar + [frame]))

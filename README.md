@@ -60,3 +60,9 @@ Because I was having fun, I wondered if a recursive approach to creating the Fra
 It does in terms of overall code length, the whole solution now being just 54 lines including comments, blank lines etc. Two things bother me though: recursive solutions are usually harder to wrap your mind around, especially if you're not used to it; I was forced to use array subscripting and fiddly bounds checks to make it work, which is harder to read in my opinion.
 
 The function moves back to being a standalone function, but I'm fairly conflicted about where it should live. However I proved the worth of being able to directly unit test it, because I had a subtle bug that would have been a pain to find otherwise.
+
+### tag: recursive_nicer
+
+I found ways to improve the recursive solution to eradicate the fiddly subscripting and generally make it nicer to read. Repeatedly using `removeFirst()`  works out better than the subscripting, and has the nice effect of allowing the bounds checks to use `isEmpty` which is much clearer. 
+
+Also changed from using `guard` to a straight if statement, as `guard` is more idiomatic for checking error preconditions rather than for recursion base case. It also inverts the checks so they are now more directly readable as the recursion base case.
