@@ -2,7 +2,7 @@
 
 ## Author
 
-Sam Carr
+Sam Carr<br/>
 Twitter: @justthesam
 
 ## Description
