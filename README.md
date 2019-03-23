@@ -67,8 +67,10 @@ I found ways to improve the recursive solution to eradicate the fiddly subscript
 
 Also changed from using `guard` to a straight if statement, as `guard` is more idiomatic for checking error preconditions rather than for recursion base case. It also inverts the checks so they are now more directly readable as the recursion base case.
 
-### tag: clearer_tests
+### tag: clearer_game_tests
 
-Here I put effort into making the other tests clearer - those that didn't get that attention earlier - by factoring out noise into helper methods. I also stripped out test cases that weren't adding anything because of overlap.
+Here I put effort into making BowlingGameTests clearer, by factoring out noise into a helper method. I also stripped out test cases that weren't adding anything because of overlap.
+
+The result is much smaller and easier to read.
 
 Initially I stumbled on a downside of moving the actual `XCTAssert` into a helper method: XCode doesn't show the failed test line in the right place - but always on the helper itself. It turns out this can be rectified by adding `file: StaticString = #file, line: UInt = #line` arguments to the helper, which pick up the right location using macros, and can then pass them into the `XCTAssert` call. Actually, just `line: UInt = #line` is enough when the helper is in the same file. Problem solved.
