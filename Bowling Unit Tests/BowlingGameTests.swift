@@ -11,186 +11,61 @@ class GameTests: XCTestCase {
         XCTAssert(game.score == 0)
     }
 
-    func testOneBall() throws {
-        game.roll(7)
-        XCTAssertEqual(game.score, 7)
-    }
+    func testWholeGame() {
+        // spare
+        roll(4, assertScore: 4)
+        roll(6, assertScore: 10)
 
-    func testTwoBalls() throws {
-        game.roll(7)
-        game.roll(2)
-        XCTAssertEqual(game.score, 9)
-    }
+        roll(3, assertScore: 16)
+        roll(3, assertScore: 19)
 
-    func testThreeBalls() throws {
-        game.roll(7)
-        game.roll(2)
-
-        game.roll(4)
-        XCTAssertEqual(game.score, 13)
-    }
-
-    func testFourBalls() throws {
-        game.roll(7)
-        game.roll(2)
-
-        game.roll(4)
-        game.roll(6)
-        XCTAssertEqual(game.score, 19)
-    }
-
-    func testSpareWithNextBall() {
-        game.roll(4)
-        game.roll(6)
-
-        game.roll(3)
-        XCTAssertEqual(game.score, 16)
-    }
-
-    func testWholeGameNoMultiStrikes() {
-        // qq want a way to express the test like a scorecard so you can _see_ it.
-        // Problem is that the score for spare/strike frames changes as subsequent balls are bowled
-        // so the classic scorecard is too static to capture that.
+        roll(4, assertScore: 23)
+        roll(1, assertScore: 24)
 
         // spare
-        game.roll(4)
-        XCTAssertEqual(game.score, 4)
-        game.roll(6)
-        XCTAssertEqual(game.score, 10)
-
-        game.roll(3)
-        XCTAssertEqual(game.score, 16)
-        game.roll(3)
-        XCTAssertEqual(game.score, 19)
-
-        game.roll(4)
-        XCTAssertEqual(game.score, 23)
-        game.roll(1)
-        XCTAssertEqual(game.score, 24)
-
-        // spare
-        game.roll(5)
-        XCTAssertEqual(game.score, 29)
-        game.roll(5)
-        XCTAssertEqual(game.score, 34)
+        roll(5, assertScore: 29)
+        roll(5, assertScore: 34)
 
         // strike
-        game.roll(10)
-        XCTAssertEqual(game.score, 54)
+        roll(10, assertScore: 54)
 
         // spare
-        game.roll(8)
-        XCTAssertEqual(game.score, 70)
-        game.roll(2)
-        XCTAssertEqual(game.score, 74)
+        roll(8, assertScore: 70)
+        roll(2, assertScore: 74)
 
-        game.roll(7)
-        XCTAssertEqual(game.score, 88)
-        game.roll(0)
-        XCTAssertEqual(game.score, 88)
+        roll(7, assertScore: 88)
+        roll(0, assertScore: 88)
 
-        game.roll(0)
-        XCTAssertEqual(game.score, 88)
-        game.roll(0)
-        XCTAssertEqual(game.score, 88)
+        roll(0, assertScore: 88)
+        roll(0, assertScore: 88)
 
-        game.roll(0)
-        XCTAssertEqual(game.score, 88)
-        game.roll(9)
-        XCTAssertEqual(game.score, 97)
+        roll(0, assertScore: 88)
+        roll(9, assertScore: 97)
 
-        game.roll(2)
-        XCTAssertEqual(game.score, 99)
-        game.roll(4)
-        XCTAssertEqual(game.score, 103)
+        roll(2, assertScore: 99)
+        roll(4, assertScore: 103)
     }
 
     // Multiple strikes in a row is interesting because the scoring needs to look two frames ahead.
-    func testWholeGameMultiStrikes() {
-        // spare
-        game.roll(4)
-        XCTAssertEqual(game.score, 4)
-        game.roll(6)
-        XCTAssertEqual(game.score, 10)
-
-        game.roll(3)
-        XCTAssertEqual(game.score, 16)
-        game.roll(3)
-        XCTAssertEqual(game.score, 19)
-
-        game.roll(4)
-        XCTAssertEqual(game.score, 23)
-        game.roll(1)
-        XCTAssertEqual(game.score, 24)
-
-        // spare
-        game.roll(5)
-        XCTAssertEqual(game.score, 29)
-        game.roll(5)
-        XCTAssertEqual(game.score, 34)
-
-        // strike
-        game.roll(10)
-        XCTAssertEqual(game.score, 54)
-
-        // strike
-        game.roll(10)
-        XCTAssertEqual(game.score, 74)
-
-        // strike
-        game.roll(10)
-        XCTAssertEqual(game.score, 104)
-
-        game.roll(5)
-        XCTAssertEqual(game.score, 119)
-        game.roll(4)
-        XCTAssertEqual(game.score, 127)
-
-        game.roll(0)
-        XCTAssertEqual(game.score, 127)
-        game.roll(9)
-        XCTAssertEqual(game.score, 136)
-
-        game.roll(2)
-        XCTAssertEqual(game.score, 138)
-        game.roll(4)
-        XCTAssertEqual(game.score, 142)
+    func testPerfectGame() throws {
+        roll(10, assertScore: 10)
+        roll(10, assertScore: 30)
+        roll(10, assertScore: 60)
+        roll(10, assertScore: 90)
+        roll(10, assertScore: 120)
+        roll(10, assertScore: 150)
+        roll(10, assertScore: 180)
+        roll(10, assertScore: 210)
+        roll(10, assertScore: 240)
+        // 10th frame has three balls but the last two only count for adding to the initial strike
+        roll(10, assertScore: 270)
+        roll(10, assertScore: 290)
+        roll(10, assertScore: 300)
     }
 
-    func testPerfectGame() throws {
-        game.roll(10)
-        XCTAssertEqual(game.score, 10)
-
-        game.roll(10)
-        XCTAssertEqual(game.score, 30)
-
-        game.roll(10)
-        XCTAssertEqual(game.score, 60)
-
-        game.roll(10)
-        XCTAssertEqual(game.score, 90)
-
-        game.roll(10)
-        XCTAssertEqual(game.score, 120)
-
-        game.roll(10)
-        XCTAssertEqual(game.score, 150)
-
-        game.roll(10)
-        XCTAssertEqual(game.score, 180)
-
-        game.roll(10)
-        XCTAssertEqual(game.score, 210)
-
-        game.roll(10)
-        XCTAssertEqual(game.score, 240)
-
-        // 10th frame has three balls but the last two only count for adding to the initial strike
-        game.roll(10)
-        XCTAssertEqual(game.score, 270)
-        game.roll(10)
-        XCTAssertEqual(game.score, 290)
-        game.roll(10)
-        XCTAssertEqual(game.score, 300)
+    private func roll(_ ball: Int, assertScore score: Int,
+                      file: StaticString = #file, line: UInt = #line) {
+        game.roll(ball)
+        XCTAssertEqual(game.score, score, file: file, line: line)
     }
 }
