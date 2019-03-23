@@ -47,9 +47,11 @@ The downside of doing one big array comparison is that when a test fails you get
 
 ### tag: take_frame
 
-I wondered if it would be neater to break the balls down into frames by having a function that simply takes _one_ frame from the head of the array of balls. Then we can call that function repeatedly until we've used up all the balls (or got 10 ten frames). The takeFrame function should be a bit simpler to test and it might work out shorter and nicer.
+I wondered if it would be neater to break the balls down into frames by having a function that simply takes _one_ frame from the head of the array of balls. Then we can call that function repeatedly until we've used up all the balls (or got ten frames). That function should be a bit simpler to test and it might work out shorter and nicer.
 
-The result is ok, but not necessarily much better - just different. The tests did get simpler, but the code is a bit bogged down in the irritations of Array being a value type and non-mutable when arriving as a parameter, and also because of the tuple return type. When I figured out how to use `while let` syntax with an extra check that `frames.count < 10` it got much nicer.
+The result is ok, but not necessarily much better - just different. The tests did get simpler, but the code is a bit bogged down in the irritations of Array not having all the methods I'd like to pull out items as Optionals. When I figured out how the `while let` syntax can incorporate an extra check that `frames.count < 10` it was rather improved.
+
+I also took the opportunity to move that function into Frame as a static method. I'm not sure whether it belongs there or not, because now the class has effectively two responsibilities - creating Frames from balls, and scoring.
 
 
 

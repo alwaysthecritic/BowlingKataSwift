@@ -16,27 +16,12 @@ class BowlingGame {
     private var frames: [Frame] {
         var remainingBalls = balls
         var frames = [Frame]()
-        while let (frame, ballsLeft) = takeFrame(remainingBalls), frames.count < 10 {
+        while let (frame, ballsLeft) = Frame.nextFrom(balls: remainingBalls), frames.count < 10 {
             remainingBalls = ballsLeft
             frames.append(frame)
         }
         return frames
     }
-}
-
-// Take balls from the front of the array to create a single frame if possible,
-// returning the frame and the remaining balls, or nil if no frame left.
-func takeFrame(_ balls: [Int]) -> (frame: Frame, remainingBalls: [Int])? {
-    guard balls.count >= 1 else {
-        return nil
-    }
-
-    let ball1 = balls[0]
-    let ball2 = (ball1 != 10 && balls.count >= 2) ? balls[1] : nil
-
-    let remainingBalls = Array(balls.suffix(from: (ball2 == nil) ? 1 : 2))
-    let frame = Frame(ball1: ball1, ball2: ball2, subsequentBalls: Array(remainingBalls.prefix(2)))
-    return (frame, remainingBalls)
 }
 
 // By modelling a frame with a subsequentBalls array, we don't need to handle the tenth frame
@@ -60,5 +45,20 @@ struct Frame: Equatable {
         } else {
             return simpleScore
         }
+    }
+
+    // Take balls from the front of the array to create a single frame if possible,
+    // returning the frame and the remaining balls, or nil if no frame left.
+    static func nextFrom(balls: [Int]) -> (frame: Frame, remainingBalls: [Int])? {
+        guard balls.count >= 1 else {
+            return nil
+        }
+
+        let ball1 = balls[0]
+        let ball2 = (ball1 != 10 && balls.count >= 2) ? balls[1] : nil
+
+        let remainingBalls = Array(balls.suffix(from: (ball2 == nil) ? 1 : 2))
+        let frame = Frame(ball1: ball1, ball2: ball2, subsequentBalls: Array(remainingBalls.prefix(2)))
+        return (frame, remainingBalls)
     }
 }
