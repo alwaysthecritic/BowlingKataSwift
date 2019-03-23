@@ -16,11 +16,9 @@ class BowlingGame {
     private var frames: [Frame] {
         var remainingBalls = balls
         var frames = [Frame]()
-        while (!remainingBalls.isEmpty && frames.count < 10) {
-            if let (frame, ballsLeft) = takeFrame(remainingBalls) {
-                remainingBalls = ballsLeft
-                frames.append(frame)
-            }
+        while let (frame, ballsLeft) = takeFrame(remainingBalls), frames.count < 10 {
+            remainingBalls = ballsLeft
+            frames.append(frame)
         }
         return frames
     }
