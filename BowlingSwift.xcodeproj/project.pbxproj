@@ -7,19 +7,19 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		4534406322464C7000CC8868 /* Frame.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4582770221ACB1F500475762 /* Frame.swift */; };
 		4534406422464C7000CC8868 /* BowlingGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4582770721AEBF7F00475762 /* BowlingGame.swift */; };
 		4534406522464C7000CC8868 /* BowlingGameTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 458276FC21ACB00B00475762 /* BowlingGameTests.swift */; };
 		4534406622464C7000CC8868 /* FrameTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4582770521ACB92B00475762 /* FrameTests.swift */; };
 		4534406A22464F6200CC8868 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 4534406922464F6200CC8868 /* README.md */; };
+		4534406C224654FF00CC8868 /* framesForBallsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4534406B224654FF00CC8868 /* framesForBallsTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		4534404D22464BA900CC8868 /* Bowling Unit Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Bowling Unit Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		4534405122464BA900CC8868 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4534406922464F6200CC8868 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		4534406B224654FF00CC8868 /* framesForBallsTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = framesForBallsTests.swift; sourceTree = "<group>"; };
 		458276FC21ACB00B00475762 /* BowlingGameTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BowlingGameTests.swift; sourceTree = "<group>"; };
-		4582770221ACB1F500475762 /* Frame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Frame.swift; sourceTree = "<group>"; };
 		4582770521ACB92B00475762 /* FrameTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FrameTests.swift; sourceTree = "<group>"; };
 		4582770721AEBF7F00475762 /* BowlingGame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BowlingGame.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -39,6 +39,7 @@
 			isa = PBXGroup;
 			children = (
 				458276FC21ACB00B00475762 /* BowlingGameTests.swift */,
+				4534406B224654FF00CC8868 /* framesForBallsTests.swift */,
 				4582770521ACB92B00475762 /* FrameTests.swift */,
 				4534405122464BA900CC8868 /* Info.plist */,
 			);
@@ -67,7 +68,6 @@
 			isa = PBXGroup;
 			children = (
 				4582770721AEBF7F00475762 /* BowlingGame.swift */,
-				4582770221ACB1F500475762 /* Frame.swift */,
 			);
 			path = Bowling;
 			sourceTree = "<group>";
@@ -140,9 +140,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4534406322464C7000CC8868 /* Frame.swift in Sources */,
 				4534406422464C7000CC8868 /* BowlingGame.swift in Sources */,
 				4534406522464C7000CC8868 /* BowlingGameTests.swift in Sources */,
+				4534406C224654FF00CC8868 /* framesForBallsTests.swift in Sources */,
 				4534406622464C7000CC8868 /* FrameTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

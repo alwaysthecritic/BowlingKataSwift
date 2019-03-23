@@ -1,39 +1,57 @@
 import Foundation
 
-// Tactic is to build up array of Frames as each ball is rolled.
-// Each Frame can score itself but needs access to subsequent frames to do so.
+// Tactic is to simply record the balls in an array, and when the score is required, figure out
+// how to break the balls into frames and score them.
 class BowlingGame {
-    private var frames = [Frame]()
+    private var balls: [Int] = []
+
+    func roll(_ ball: Int) {
+        balls.append(ball)
+    }
 
     var score: Int {
-        let emptyLastNextFrame = Frame(number: frames.count + 1)
-        let nextFrames = frames.dropFirst() + [emptyLastNextFrame]
-        let framesWithNextFrames = zip(frames, nextFrames)
-        let frameScores = framesWithNextFrames.map { (frame, nextFrame) in
-            // TODO unfortunately, just the next frame is not enough when there are multiple
-            // strikes in a row, where we may need the next two frames.
-            frame.score(nextFrame: nextFrame)
-        }
-        return frameScores.reduce(0, +)
+        return framesForBalls(balls).map({ $0.score }).reduce(0, +)
     }
+}
 
-    func roll(_ ball: Int) throws {
-        if let lastFrame = frames.last {
-            if (lastFrame.canHaveMoreBalls) {
-                try lastFrame.roll(ball)
-            } else {
-                let newFrame = addNewFrame(number: lastFrame.frameNumber + 1)
-                try newFrame.roll(ball)
-            }
+// More easily testable as a standalone than as a private method. Doesn't warrant a class.
+func framesForBalls(_ balls: [Int]) -> [Frame] {
+    var remainingBalls = balls
+    var frames = [Frame]()
+
+    while (!remainingBalls.isEmpty && frames.count < 10) {
+        let ball1 = remainingBalls.removeFirst()
+
+        if (ball1 == 10) {
+            frames.append(Frame(ball1: ball1, ball2: nil, subsequentBalls: remainingBalls))
         } else {
-            let newFrame = addNewFrame(number: 1)
-            try newFrame.roll(ball)
+            let ball2 = remainingBalls.isEmpty ? nil : remainingBalls.removeFirst()
+            frames.append(Frame(ball1: ball1, ball2: ball2, subsequentBalls: remainingBalls))
         }
     }
+    return frames
+}
 
-    private func addNewFrame(number: Int) -> Frame {
-        let newFrame = Frame(number: number)
-        frames.append(newFrame)
-        return newFrame
+// By modelling a frame with a subsequentBalls array, we don't need to handle the tenth frame
+// any differently in here and the scoring logic is simple and easily tested.
+struct Frame: Equatable {
+    let ball1: Int
+    let ball2: Int?
+    let subsequentBalls: [Int]
+
+    var isStrike: Bool { return ball1 == 10 }
+
+    var isSpare: Bool { return simpleScore == 10}
+
+    var simpleScore: Int { return ball1 + (ball2 ?? 0) }
+
+    var score: Int {
+        if (isStrike) {
+            return simpleScore + subsequentBalls.prefix(2).reduce(0, +)
+        } else if (isSpare) {
+            return simpleScore + subsequentBalls.prefix(1).reduce(0, +)
+        } else {
+            return simpleScore
+        }
     }
 }
