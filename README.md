@@ -34,3 +34,13 @@ Overall it's surprisingly short and simple and feels so much better than the ini
 Note that I moved all the code into the BowlingGame.swift file because it's sufficiently short and it helps to see how it all works together. Also, this solution does not perform any checks for invalid balls like the first one did, partly because the new approach doesn't demand it in quite the same way. It could be added in again fairly easily I think.
 
 Perhaps controversially there is a standalone function (not in any class/struct) for turning the balls array into Frames. This was largely because I wanted to unit test that function and I couldn't do that if it was private in BowlingGame. I'm glad I did unit test it directly (instead of as part of the black box of BowlingGame) as it has enough complexity that it really helped to get it right.
+
+### tag: nicer_frame_array_comparison
+
+The tests in framesForBallsTests.swift were a bit cumbersome. I tried to simplify by comparing the whole resulting array with the expected array instead of checking the size and comparing each individual entry separately as I was doing before. Swift structs marked as Equatable (i.e. Frame here) make this fairly neat and allow a fairly declarative style in tests
+
+I also improved the code to only send a maximum of two subsequentBalls, which is all that is needed anyway for scoring a frame, and saves the tests from exhaustively listing _all_ the subsequent balls for each frame.
+
+The net result is that the tests are now much more readable and it's easier to see what they're saying. I think it's worth investing in making tests really _speak_ to you, so they're easy to read and write courtesy of being a straightforward declaration of what you intend in the domain. Factor out all the incidental mess and get those tests talking! More work yet to be done in those code base to achieve that in the other tests.   
+
+The downside of doing one big array comparison is that when a test fails you get a poor message with the entire actual and expected arrays included. That makes it almost impossible to see what was different between them. Personally I consider this a failing of XCTest. I really miss the excellent output you get from tools in JVM-land like Spock (for Groovy) which highlight the differences for you. Maybe there's a way to get this in Swift.

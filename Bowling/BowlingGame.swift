@@ -23,10 +23,12 @@ func framesForBalls(_ balls: [Int]) -> [Frame] {
         let ball1 = remainingBalls.removeFirst()
 
         if (ball1 == 10) {
-            frames.append(Frame(ball1: ball1, ball2: nil, subsequentBalls: remainingBalls))
+            frames.append(Frame(ball1: ball1, ball2: nil,
+                                subsequentBalls: Array(remainingBalls.prefix(2))))
         } else {
             let ball2 = remainingBalls.isEmpty ? nil : remainingBalls.removeFirst()
-            frames.append(Frame(ball1: ball1, ball2: ball2, subsequentBalls: remainingBalls))
+            frames.append(Frame(ball1: ball1, ball2: ball2,
+                                subsequentBalls: Array(remainingBalls.prefix(2))))
         }
     }
     return frames
