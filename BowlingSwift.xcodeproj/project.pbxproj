@@ -104,6 +104,7 @@
 				TargetAttributes = {
 					4534404C22464BA900CC8868 = {
 						CreatedOnToolsVersion = 10.1;
+						LastSwiftMigration = 1020;
 					};
 				};
 			};
@@ -113,6 +114,7 @@
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
+				Base,
 			);
 			mainGroup = 458276E321ACAE0E00475762;
 			productRefGroup = 458276ED21ACAE0E00475762 /* Products */;
@@ -164,7 +166,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.justthesam.Bowling-Unit-Tests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 			};
 			name = Debug;
 		};
@@ -182,7 +184,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.justthesam.Bowling-Unit-Tests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 			};
 			name = Release;
 		};
