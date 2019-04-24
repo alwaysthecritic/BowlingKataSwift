@@ -47,7 +47,7 @@ struct Frame: Equatable {
         if (isStrike) {
             return simpleScore + subsequentBalls.prefix(2).reduce(0, +)
         } else if (isSpare) {
-            return simpleScore + subsequentBalls.prefix(1).reduce(0, +)
+            return simpleScore + (subsequentBalls.first ?? 0)
         } else {
             return simpleScore
         }
