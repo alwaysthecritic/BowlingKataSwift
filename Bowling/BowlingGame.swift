@@ -15,6 +15,7 @@ class BowlingGame {
 }
 
 // Recursively build Frames by taking balls from the array until none left.
+// This is a standalone function for testability.
 func framesForBalls(_ balls: [Int], framesSoFar: [Frame] = [Frame]()) -> [Frame] {
     if (balls.isEmpty || framesSoFar.count == 10) {
         return framesSoFar
