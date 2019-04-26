@@ -9,7 +9,7 @@ Twitter: @justthesam
 
 This is a solution to the classic Bowling kata, in Swift. In simple terms this kata challenges you to score a single player bowling game. I shan't go into the details of the rules here.
 
-Actually I experimented with a couple of solutions and got sucked into polishing things up further as a learning exercise, so this git repo presents the evolution of the solution. I've learnt a lot and had fun with it.
+I experimented with a couple of solutions and got sucked into polishing things up further as a learning exercise, so this git repo presents the evolution of the solution. I've learnt a lot and had fun with it.
 
 ## Usage
 
