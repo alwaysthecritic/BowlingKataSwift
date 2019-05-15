@@ -79,7 +79,7 @@ There's a meta-point there too. Having observed the helper method problem I coul
 
 ### tag: parameterised_tests
 
-FrameScoreTests was crying out to use a parameterised (also known as data-driven) approach to testing, as all the tests had the exact same form. just with different values. It would be nice to state all the test cases as a table of all the values and expected outcomes.
+FrameScoreTests was crying out to use a parameterised (also known as data-driven) approach to testing, as all the tests had the exact same form, just with different values. It would be nice to state all the test cases as a table of all the values and expected outcomes.
 
 Sadly XCTest doesn't directly support this in the way that test frameworks for other languages do, and I couldn't find a third party Swift unit testing framework to do it either. People around the Interwebs have hacked their own approaches within the constraints of XCTest, but many of them were too complicated and failed to achieve Proper XCode integration that shows the failures against the right line of the table of test cases.
 
